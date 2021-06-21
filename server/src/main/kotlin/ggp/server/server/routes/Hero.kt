@@ -51,7 +51,7 @@ fun Route.hero() {
         } catch (e: Throwable) {
             logger.error("Reason: {}", closeReason.await(), e)
         } finally {
-            game.player.set(null)
+            game.hero.set(null)
         }
     }
 }
