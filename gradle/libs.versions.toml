@@ -1,0 +1,15 @@
+[versions]
+ktor = "1.6.0"
+koin = "3.1.0"
+
+log4j = "2.8.2"
+
+[libraries]
+ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
+ktor-websockets = { module = "io.ktor:ktor-websockets", version.ref = "ktor" }
+koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
+log4j-core = { group = "org.apache.logging.log4j", name = "log4j-core", version.ref = "log4j" }
+log4j-slf4j-impl = { group = "org.apache.logging.log4j", name = "log4j-slf4j-impl", version.ref = "log4j" }
+
+[bundles]
+log4j = ["log4j-core", "log4j-slf4j-impl"]
