@@ -29,8 +29,6 @@ fun Route.player() {
 
         val game = games.getOrPut(gameId) { Game(gameId) }
 
-        logger.debug("Game #{}: {}", gameId, game)
-
         if (!game.player.compareAndSet(null, Player(this))) {
             logger.warn("Kicking the player off the game")
 

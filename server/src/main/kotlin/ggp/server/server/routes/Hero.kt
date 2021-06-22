@@ -2,7 +2,6 @@ package ggp.server.server.routes
 
 import ggp.server.server.game.Game
 import ggp.server.server.game.Hero
-import ggp.server.server.game.Player
 import io.ktor.http.cio.websocket.CloseReason
 import io.ktor.http.cio.websocket.close
 import io.ktor.routing.Route
@@ -30,20 +29,10 @@ fun Route.hero() {
 
         val game = games.getOrPut(gameId) { Game(gameId) }
 
-        logger.debug("Game #{}: {}", gameId, game)
-
-        if (!game.hero.compareAndSet(null, Hero(this))) {
-            logger.warn("Kicking the hero off the game")
-
-            this.close(CloseReason(CloseReason.Codes.CANNOT_ACCEPT, "No more heroes allowed!"))
-
-            return@webSocket
-        }
+        game.hero.set(Hero(this))
 
         try {
-            for (frame in incoming) {
-                logger.debug("Game #{}, Frame: {}", gameId, frame)
-            }
+            closeReason.await()
 
             logger.info("The hero has disconnected from the game #{}", gameId)
         } catch (e: ClosedReceiveChannelException) {
