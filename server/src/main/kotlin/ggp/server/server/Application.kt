@@ -1,6 +1,7 @@
 package ggp.server.server
 
 import ggp.server.server.config.gamesModule
+import ggp.server.server.routes.game
 import ggp.server.server.routes.hero
 import ggp.server.server.routes.player
 import io.ktor.application.Application
@@ -24,6 +25,7 @@ fun Application.main() {
     }
 
     routing {
+        game()
         player()
         hero()
     }

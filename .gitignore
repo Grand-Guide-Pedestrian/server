@@ -2,3 +2,5 @@
 build
 
 .idea
+
+server/src/main/resources/game
